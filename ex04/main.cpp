@@ -13,9 +13,6 @@ void analyze_line(std::ofstream& output_file, std::string& line, std::string& st
     }
     while((pos = line.find(str1, start)) != std::string::npos)
     {
-        std::cout << "pos: " << pos << std::endl;
-        std::cout << "start: " << start << std::endl;
-        std::cout << "\""<< line.substr(start, pos - start) << "\"" << std::endl;
         output_file << line.substr(start, pos - start);
         output_file << str2;
         start = pos + str1.length();
