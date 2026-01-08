@@ -6,7 +6,6 @@ HumanB::HumanB(std::string n) : name(n)
 
 HumanB::~HumanB()
 {
-
 }
 
 void HumanB::setWeapon(Weapon& weapon)

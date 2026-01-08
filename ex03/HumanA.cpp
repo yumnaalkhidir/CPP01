@@ -6,7 +6,6 @@ HumanA::HumanA(std::string n, Weapon& w) : name(n) , weapon(w)
 
 HumanA::~HumanA()
 {
-
 }
 
 void HumanA::attack()
