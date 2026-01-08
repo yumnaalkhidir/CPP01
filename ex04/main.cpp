@@ -2,13 +2,26 @@
 #include <fstream>
 #include <string>
 
-void analyze_line(std::ofstream& output_file, std::string line, std::string str1, std::string str2)
+void analyze_line(std::ofstream& output_file, std::string& line, std::string& str1, std::string& str2)
 {
-    std::cout << str1 << std::endl;
-    std::cout << str2 << std::endl;
-    output_file << line << std::endl;
+    std::string::size_type pos;
+    std::string::size_type start = 0;
+    if (str1.empty())
+    {
+        output_file << line;
+        return;
+    }
+    while((pos = line.find(str1, start)) != std::string::npos)
+    {
+        std::cout << "pos: " << pos << std::endl;
+        std::cout << "start: " << start << std::endl;
+        std::cout << "\""<< line.substr(start, pos - start) << "\"" << std::endl;
+        output_file << line.substr(start, pos - start);
+        output_file << str2;
+        start = pos + str1.length();
+    }
+    output_file << line.substr(start);
 }
-
 
 int main(int ac, char **av)
 {
@@ -17,37 +30,38 @@ int main(int ac, char **av)
     {
         std::string infile = av[1];
         std::string outfile = infile + ".replace";
-        std::cout << "infile is: " << infile << std::endl;
-        std::cout << "outfile is: " << outfile << std::endl;
-
+        std::string str1 = av[2];
+        std::string str2 = av[3];
         std::ifstream input_file;
         std::ofstream output_file;
+
         input_file.open(infile.c_str());
-        output_file.open(outfile.c_str());
-        std::string line;
-        if (input_file.is_open())
+        if (!input_file.is_open())
         {
-            if (output_file.is_open())
+            std::cerr << "Error\nCan´t open input file" << std::endl;
+            return (1);
+        }
+        output_file.open(outfile.c_str());
+        if (!output_file.is_open())
+        {
+            std::cerr << "Error\nCan´t open output file" << std::endl;
+            return (1);
+        }
+        std::string line; 
+        while(getline(input_file, line))
+        {
+            if (str1 == str2)
             {
-                while(getline(input_file, line))
-                    analyze_line(output_file, line, av[2], av[3]);
+                output_file << line;
+                output_file << std::endl;
             }
             else
-                std::cerr << "Error\n Output file isn´t open \n" << std::endl;
-
+            {
+                analyze_line(output_file, line, str1, str2);
+                output_file << std::endl;
+            }
         }
-        else
-            std::cerr << "Error\n Input file isn´t open \n" << std::endl;
-
     }
     else
         std::cout << "Usage: ./replace <filename> <string1> <string2>" << std::endl;
-
 }
-
-/*
-create the two files input and output files
-read from the input file line by line
-analyze each line word by word and write it to my writing file and stop when the s1 string is found and 
-write s2 to the writing file
-*/
