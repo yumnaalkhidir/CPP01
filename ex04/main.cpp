@@ -4,8 +4,8 @@
 
 void analyze_line(std::ofstream& output_file, std::string& line, std::string& str1, std::string& str2)
 {
-    std::string::size_type pos;
-    std::string::size_type start = 0;
+    size_t pos;
+    size_t start = 0;
     if (str1.empty())
     {
         output_file << line;
@@ -31,6 +31,7 @@ int main(int ac, char **av)
         std::string str2 = av[3];
         std::ifstream input_file;
         std::ofstream output_file;
+        std::string line; 
 
         input_file.open(infile.c_str());
         if (!input_file.is_open())
@@ -44,7 +45,7 @@ int main(int ac, char **av)
             std::cerr << "Error\nCan´t open output file" << std::endl;
             return (1);
         }
-        std::string line; 
+        
         while(getline(input_file, line))
         {
             if (str1 == str2)
