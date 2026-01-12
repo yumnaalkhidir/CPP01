@@ -21,28 +21,6 @@ void Harl::error(void)
 {
     std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
-// void Harl::complain(std::string level)
-// {
-//     std::string complain_levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-//     void(Harl::*ptrToFunction[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-
-//     for (int i = 0; i < 4; i++)
-//     {
-//         if (level == complain_levels[i])
-//         {
-//             while(i < 4)
-//             {
-//                 std::cout << "[ " << complain_levels[i] << " ]" << std::endl;
-//                 (this->*ptrToFunction[i])();
-//                 std::cout << std::endl;
-//                 i++;
-//                 if (i >= 4)
-//                     return ;
-//             }
-//         }
-//     }
-//     std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-// }
 
 void Harl::complain(std::string level)
 {
@@ -58,34 +36,34 @@ void Harl::complain(std::string level)
     {
     case 0:
         std::cout << "[ DEBUG ]" << std::endl;
-        Harl::debug();
+        debug();
         std::cout << std::endl << "[ INFO ]" << std::endl;
-        Harl::info();
+        info();
         std::cout << std::endl << "[ WARNING ]" << std::endl;
-        Harl::warning();
+        warning();
         std::cout << std::endl << "[ ERROR ]" << std::endl;
-        Harl::error();
+        error();
         std::cout << std::endl;
         break;
     case 1:
         std::cout << "[ INFO ]" << std::endl;
-        Harl::info();
+        info();
         std::cout << std::endl << "[ WARNING ]" << std::endl;
-        Harl::warning();
+        warning();
         std::cout << std::endl << "[ ERROR ]" << std::endl;
-        Harl::error();
+        error();
         std::cout << std::endl;
         break;
     case 2:
         std::cout << "[ WARNING ]" << std::endl;
-        Harl::warning();
+        warning();
         std::cout << std::endl << "[ ERROR ]" << std::endl ;
-        Harl::error();
+        error();
         std::cout << std::endl;
         break;
     case 3:
         std::cout << "[ ERROR ]" << std::endl;
-        Harl::error();
+        error();
         std::cout << std::endl;
         break;
     default:

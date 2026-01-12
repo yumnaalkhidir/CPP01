@@ -1,18 +1,9 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie()
-{
-    std::cout << "Default Constructor called" << std::endl;
-}
-
-void Zombie::set_name(std::string name)
+Zombie::Zombie(std::string name)
 {
     this->name = name;
-}
-
-std::string Zombie::get_name(void)
-{
-    return (this->name);
+    std::cout << "Default Constructor called" << std::endl;
 }
 
 Zombie::~Zombie()

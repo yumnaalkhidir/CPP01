@@ -10,11 +10,6 @@ void Zombie::set_name(std::string name)
     this->name = name;
 }
 
-std::string Zombie::get_name(void)
-{
-    return (this->name);
-}
-
 Zombie::~Zombie()
 {
     std::cout << name << " says Goodbye" << std::endl;
