@@ -15,22 +15,3 @@ int main(void)
     std::cout << "The value pointed to by stringPTR: " << *stringPTR << std::endl;
     std::cout << "The value pointed to by stringREF: " << stringREF << std::endl;
 }
-
-
-
-
-void chang_x(int *x)
-{
-    (*x)++;
-}
-
-void chang_x(int &x)
-{
-    &x
-    x++;
-}
-
-void chang_x(int x)
-{
-    x++;
-}

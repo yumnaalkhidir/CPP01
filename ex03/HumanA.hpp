@@ -2,6 +2,7 @@
 #define HUMANA_HPP
 
 #include "Weapon.hpp"
+
 class HumanA
 {
     private:

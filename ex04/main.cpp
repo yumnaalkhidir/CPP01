@@ -2,27 +2,25 @@
 #include <fstream>
 #include <string>
 
-void analyze_line(std::ofstream& output_file, std::string& line, std::string& str1, std::string& str2)
+std::string analyze_line(std::string line, std::string str1, std::string str2)
 {
+    std::string result;
     size_t pos;
     size_t start = 0;
     if (str1.empty())
-    {
-        output_file << line;
-        return;
-    }
+        return (line);
     while((pos = line.find(str1, start)) != std::string::npos)
     {
-        output_file << line.substr(start, pos - start);
-        output_file << str2;
+        result.append(line, start, pos - start);
+        result.append(str2);
         start = pos + str1.length();
     }
-    output_file << line.substr(start);
+    result.append(line, start);
+    return (result);
 }
 
 int main(int ac, char **av)
 {
-
     if (ac == 4)
     {
         std::string infile = av[1];
@@ -45,20 +43,22 @@ int main(int ac, char **av)
             std::cerr << "Error\nCan´t open output file" << std::endl;
             return (1);
         }
-        
+        bool first_line = true;
         while(getline(input_file, line))
         {
+            if (!first_line)
+                output_file << '\n';
+            first_line = false;
             if (str1 == str2)
-            {
                 output_file << line;
-                output_file << std::endl;
-            }
             else
-            {
-                analyze_line(output_file, line, str1, str2);
-                output_file << std::endl;
-            }
+               output_file << analyze_line(line, str1, str2);
         }
+        getline(input_file, line);
+        if (!first_line && line.empty())
+            output_file << std::endl;
+        output_file.close();
+        input_file.close();
     }
     else
         std::cout << "Usage: ./replace <filename> <string1> <string2>" << std::endl;

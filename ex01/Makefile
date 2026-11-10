@@ -1,6 +1,6 @@
 CXX			:= c++
 CXXFLAGS	:= -Wall -Werror -Wextra -std=c++98
-NAME		:= ZombieHorde
+NAME		:= zombieHorde
 FILES		:= Zombie.cpp \
 				zombieHorde.cpp \
 				main.cpp 
